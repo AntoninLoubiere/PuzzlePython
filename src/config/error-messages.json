@@ -1,0 +1,11 @@
+{
+    "auth/network-request-failed": "La connexion au serveur a échoué",
+    "auth/invalid-email": "Adresse mail ou mot de passe incorrecte",
+    "auth/user-cancelled": "Adresse mail ou mot de passe incorrecte",
+    "auth/user-not-found": "Adresse mail ou mot de passe incorrecte",
+    "auth/user-disabled": "Adresse mail ou mot de passe incorrecte",
+    "auth/user-mismatch": "Adresse mail ou mot de passe incorrecte",
+    "auth/user-signed-out": "Adresse mail ou mot de passe incorrecte",
+    "auth/wrong-password": "Adresse mail ou mot de passe incorrecte",
+    "default": "Une érreur est survenue"
+}

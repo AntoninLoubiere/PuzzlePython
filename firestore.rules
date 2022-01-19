@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function verifyFields(required) {
+      return request.resource.data.keys().hasAll(required) &&
+        request.resource.data.keys().hasOnly(required);
+    }
+    match /puzzles/{puzzleId} {
+      allow read;
+      allow update, delete: if resource != null && request.auth != null && request.auth.uid == resource.data.owner;
+      allow create: if request.auth != null;
+
+      match /results/{userId} {
+        allow get;
+        allow delete, list: if request.auth.uid == get(/databases/$(database)/documents/puzzles/$(puzzleId)).data.owner;
+        allow create: if verifyFields(['name', 'success']) && request.resource.data.name is string && request.resource.data.success is bool;
+        allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['success']) && request.resource.data.success is bool;
+      }
+    }
+  }
+}
