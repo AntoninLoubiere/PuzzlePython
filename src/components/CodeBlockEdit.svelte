@@ -3,7 +3,12 @@
     import python from 'highlight.js/lib/languages/python';
     import { createEventDispatcher } from 'svelte';
     import type { Block } from '../global';
+
     export let block: Block;
+    export let indent: boolean;
+
+    const TAB_WIDTH = 4;
+
     hljs.registerLanguage('python', python);
 
     const BLOCK_INDENT_WIDTH = 4;
@@ -28,18 +33,54 @@
     function sendDelete() {
         dispatcher('delete');
     }
+
+    function onInputBlur() {
+        edited = false;
+        let indentSize: number;
+        if (indent && (indentSize = countTab())) {
+            block.indent = indentSize;
+        }
+        block.code = block.code.trim();
+        dispatcher('update');
+    }
+
+    function countTab() {
+        let spaces = 0;
+        let tabs = 0;
+        for (let i = 0; i < block.code.length; i++) {
+            if (block.code[i] == ' ') {
+                spaces += 1;
+            } else if (block.code[i] == '\t') {
+                tabs += 1;
+            } else {
+                break;
+            }
+        }
+
+        return tabs + Math.round(spaces / TAB_WIDTH);
+    }
+
+    function onInput(event: KeyboardEvent) {
+        if (event.key == 'Tab') {
+            block.code = '\t' + block.code;
+            event.preventDefault();
+        } else if (event.key == 'Escape') {
+            onInputBlur();
+        }
+    }
 </script>
 
 <div class="w-full group" bind:clientWidth={width} on:dblclick={() => (edited = true)}>
     <div
-        style="--move-x: min({BLOCK_INDENT_WIDTH * block.indent}ch, calc(({width /
+        style="--move-x: min({indent && BLOCK_INDENT_WIDTH * block.indent}ch, calc(({width /
             MAX_INDENT}) * {block.indent}px));
 				transform: translateX(var(--move-x));
 				width: calc(100% - var(--move-x));"
         class="flex items-center transition-all"
     >
         <button
-            class="h-6 w-6 inline hover:text-primary-variant invisible group-hover:visible"
+            class="h-6 w-6 inline hover:text-primary-variant invisible"
+            class:group-hover:visible={indent}
             class:text-neutral-500={block.indent <= 0}
             class:hover:text-neutral-500={block.indent <= 0}
             on:click={decrementIndent}
@@ -60,6 +101,7 @@
         </button>
         <button
             class="h-6 w-6 inline hover:text-primary-variant mr-1 invisible group-hover:visible"
+            class:group-hover:visible={indent}
             class:text-neutral-500={block.indent >= MAX_INDENT - 1}
             class:hover:text-neutral-500={block.indent >= MAX_INDENT - 1}
             on:click={incrementIndent}
@@ -85,7 +127,8 @@
                 <!-- svelte-ignore a11y-autofocus -->
                 <textarea
                     bind:value={block.code}
-                    on:blur={() => (edited = false)}
+                    on:keydown={onInput}
+                    on:blur={onInputBlur}
                     class="w-full focus:ring-transparent"
                     autofocus
                     placeholder="Code python"
@@ -93,7 +136,7 @@
             {:else}
                 <div class="flex items-center px-3 py-2">
                     <pre class="flex-grow">{@html hljs.highlight(block.code || ' ', {
-                            language: 'python'
+                            language: 'python',
                         }).value}</pre>
 
                     <button on:click={() => (edited = true)}>

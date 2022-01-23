@@ -11,3 +11,5 @@ src/config/firebase-config.json
 .firebaserc
 
 firebase.json
+
+.vscode/

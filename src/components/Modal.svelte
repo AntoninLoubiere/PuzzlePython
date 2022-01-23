@@ -14,7 +14,7 @@
     transition:fade={{ duration: 500 }}
 >
     <div
-        class="relative top-0 sm:rounded-xl shadow-lg bg-white dark:bg-gray-900 mx-auto w-full max-w-3xl sm:max-w-max sm:w-3/5 min-w-1/3 px-4 py-3"
+        class="relative top-16 sm:rounded-xl shadow-lg bg-white dark:bg-gray-900 mx-auto w-full max-w-3xl sm:max-w-max sm:w-3/5 min-w-1/3 px-4 py-3"
         transition:fly={{ y: -100, duration: 500 }}
         on:click|stopPropagation
     >

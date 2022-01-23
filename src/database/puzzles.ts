@@ -14,9 +14,9 @@ import {
     DocumentReference,
     orderBy,
     writeBatch,
-    limit
+    limit,
 } from 'firebase/firestore';
-import type { Puzzle, Results } from '../global';
+import type { Block, Puzzle, Results } from '../global';
 
 const db = getFirestore(firebaseApp);
 
@@ -28,8 +28,13 @@ const puzzleConverter: FirestoreDataConverter<Puzzle> = {
             blocks: puzzle.blocks.map((b) => {
                 return { code: b.code, indent: b.indent };
             }),
+            falseBlocks: puzzle.falseBlocks
+                .sort((a: Block, b: Block) => a.code.localeCompare(b.code))
+                .map((b) => {
+                    return { code: b.code || '' };
+                }),
             creation_date: puzzle.creation_date,
-            description: puzzle.description
+            description: puzzle.description,
         };
     },
     fromFirestore: (snapshot, options) => {
@@ -40,9 +45,22 @@ const puzzleConverter: FirestoreDataConverter<Puzzle> = {
                 return {
                     id: i,
                     code: b.code,
-                    indent: b.indent
+                    indent: b.indent,
                 };
             });
+        }
+
+        let falseBlocks = [];
+        if (Array.isArray(data.falseBlocks)) {
+            falseBlocks = data.falseBlocks
+                .map((b, i) => {
+                    return {
+                        id: blocks.length + i,
+                        code: b.code,
+                        indent: 0,
+                    };
+                })
+                .sort((a: Block, b: Block) => a.code.localeCompare(b.code));
         }
 
         return {
@@ -50,10 +68,11 @@ const puzzleConverter: FirestoreDataConverter<Puzzle> = {
             name: data.name,
             description: data.description,
             owner: data.owner,
-            blocks: blocks,
-            creation_date: data.creation_date
+            blocks,
+            falseBlocks,
+            creation_date: data.creation_date,
         };
-    }
+    },
 };
 
 const puzzleRef = collection(db, 'puzzles').withConverter(puzzleConverter);
@@ -83,7 +102,8 @@ export function createNewEmpty(useUid: string): Puzzle {
         description: '',
         owner: useUid,
         blocks: [],
-        creation_date: Timestamp.fromDate(new Date())
+        falseBlocks: [],
+        creation_date: Timestamp.fromDate(new Date()),
     };
 }
 

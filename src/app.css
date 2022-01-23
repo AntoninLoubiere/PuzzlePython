@@ -197,7 +197,7 @@ code.hljs {
 
 @layer components {
     html {
-        @apply text-black dark:text-white bg-white dark:bg-gray-900;
+        @apply text-black dark:text-white bg-white dark:bg-gray-900 text-sm md:text-base;
     }
 
     .color-primary {
@@ -237,5 +237,9 @@ code.hljs {
 
     textarea {
         @apply input;
+    }
+
+    li {
+        @apply mx-2 my-3;
     }
 }

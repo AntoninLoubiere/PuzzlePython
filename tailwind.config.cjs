@@ -7,16 +7,19 @@ const config = {
                 primary: {
                     DEFAULT: '#845ec2',
                     dark: '#6036A5',
-                    variant: '#E041B0'
-                }
+                    variant: '#E041B0',
+                },
             },
             minWidth: {
-                '1/3': '33vw'
-            }
-        }
+                '1/3': '33vw',
+            },
+            minHeight: {
+                l: '1.25rem',
+            },
+        },
     },
 
-    plugins: []
+    plugins: [],
 };
 
 module.exports = config;

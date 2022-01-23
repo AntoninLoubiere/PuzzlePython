@@ -13,7 +13,7 @@
     }
 </script>
 
-<header class="pl-4 sticky top-0 bg-primary dark:bg-primary-dark text-white h-10">
+<header class="pl-4 sticky top-0 bg-primary dark:bg-primary-dark text-white h-10 z-10">
     <nav class="grid grid-cols-3 items-center justify-between h-full">
         {#if $userStore.isLoggedIn}
             <span class="order-1 whitespace-nowrap">{$userStore.user.email.split('@')[0]}</span>

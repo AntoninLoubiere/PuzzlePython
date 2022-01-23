@@ -9,7 +9,7 @@ export const userStore = writable<{
     firebaseControlled: boolean;
 }>({
     isLoggedIn: false,
-    firebaseControlled: false
+    firebaseControlled: false,
 });
 
 function getUserKey(): string {
