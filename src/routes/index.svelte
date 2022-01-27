@@ -1,11 +1,9 @@
 <script lang="ts">
-    import type { Puzzle } from '../global';
+    import { loadPuzzles } from '$lib/database/puzzles';
 
-    import { loadPuzzles } from '../database/puzzles';
-
-    import { userStore } from '../store';
-    import PuzzleList from '../components/PuzzleList.svelte';
-    import LoginWrapper from '../components/LoginWrapper.svelte';
+    import { userStore } from '$lib/store';
+    import PuzzleList from '$lib/components/PuzzleList.svelte';
+    import LoginWrapper from '$wlib/components/LoginWrapper.svelte';
 
     let puzzles: Puzzle[] = [];
     $: if ($userStore.isLoggedIn) {

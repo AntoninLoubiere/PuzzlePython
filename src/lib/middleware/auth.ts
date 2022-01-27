@@ -1,6 +1,6 @@
 import { userStore } from '../store';
 import { getAuth } from 'firebase/auth';
-import { firebaseApp } from '../config/firebaseApp';
+import { firebaseApp } from '$lib/config/firebaseApp';
 
 export const auth = getAuth(firebaseApp);
 auth.onAuthStateChanged(() => {

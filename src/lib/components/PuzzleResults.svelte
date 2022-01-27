@@ -1,8 +1,6 @@
 <script lang="ts">
-    import { anonymousUserName, userId, userStore } from '../store';
-    import type { Puzzle, Results } from '../global';
-    import { createEventDispatcher } from 'svelte';
-    import { deleteAllResults, setPuzzleResults } from '../database/puzzles';
+    import { anonymousUserName, userId, userStore } from '$lib/store';
+    import { deleteAllResults, setPuzzleResults } from '$lib/database/puzzles';
     import Modal from './Modal.svelte';
     export let shuffle: boolean;
     export let puzzle: Puzzle;

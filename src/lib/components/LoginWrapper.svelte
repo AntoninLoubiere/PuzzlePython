@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { userStore } from '../store';
+    import { userStore } from '$lib/store';
 </script>
 
 {#if !$userStore.firebaseControlled}

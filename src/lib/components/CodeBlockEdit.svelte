@@ -1,15 +1,11 @@
 <script lang="ts">
-    import hljs from 'highlight.js';
-    import python from 'highlight.js/lib/languages/python';
+    import hljs from '$lib/config/highlight';
     import { createEventDispatcher } from 'svelte';
-    import type { Block } from '../global';
 
     export let block: Block;
     export let indent: boolean;
 
     const TAB_WIDTH = 4;
-
-    hljs.registerLanguage('python', python);
 
     const BLOCK_INDENT_WIDTH = 4;
     const MAX_INDENT = 10;

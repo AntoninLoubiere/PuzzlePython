@@ -2,7 +2,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-    import errorMessages from '../config/error-messages.json';
+    import errorMessages from '$lib/config/error-messages.json';
 
     function onSubmit() {
         loading = true;

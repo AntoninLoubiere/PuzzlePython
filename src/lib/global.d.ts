@@ -1,7 +1,5 @@
 /// <reference types="@sveltejs/kit" />
 
-import type { Timestamp } from 'firebase/firestore';
-
 interface Puzzle {
     id: string;
     name: string;
@@ -9,7 +7,7 @@ interface Puzzle {
     owner: string;
     blocks: Block[];
     falseBlocks: Block[];
-    creation_date: Timestamp;
+    creation_date: import('firebase/firestore').Timestamp;
 }
 
 interface Block {
@@ -25,7 +23,8 @@ interface Results {
 
 declare type DndEvent = import('svelte-dnd-action').DndEvent;
 
-declare namespace JSX {
+declare namespace svelte.JSX {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface HTMLAttributes<T> {
         onconsider?: (event: CustomEvent<DndEvent> & { target: EventTarget & T }) => void;
         onfinalize?: (event: CustomEvent<DndEvent> & { target: EventTarget & T }) => void;

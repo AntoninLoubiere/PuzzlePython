@@ -16,7 +16,6 @@ import {
     writeBatch,
     limit,
 } from 'firebase/firestore';
-import type { Block, Puzzle, Results } from '../global';
 
 const db = getFirestore(firebaseApp);
 

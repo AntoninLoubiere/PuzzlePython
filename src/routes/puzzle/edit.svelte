@@ -1,9 +1,8 @@
 <script lang="ts">
-    import type { Puzzle } from '../../global';
     import { onMount } from 'svelte';
-    import { createNewEmpty, getPuzzle, removePuzzle, savePuzzle } from '../../database/puzzles';
-    import { userStore } from '../../store';
-    import CodeBlocksListEdit from '../../components/CodeBlocksListEdit.svelte';
+    import { createNewEmpty, getPuzzle, removePuzzle, savePuzzle } from '$lib/database/puzzles';
+    import { userStore } from '$lib/store';
+    import CodeBlocksListEdit from '$lib/components/CodeBlocksListEdit.svelte';
     import { goto } from '$app/navigation';
 
     let puzzlePromise: Promise<Puzzle | null> = new Promise(() => null);
@@ -12,7 +11,7 @@
     let loading = true;
     let error = false;
     let blocksId = null;
-    let validError: string = '';
+    let validError = '';
     let isNewPuzzle = false;
     let disabled = false;
 

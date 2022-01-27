@@ -7,9 +7,7 @@ node_modules
 .env.*
 !.env.example
 /.firebase
-src/config/firebase-config.json
+src/lib/config/firebase-config.json
 .firebaserc
-
 firebase.json
-
 .vscode/

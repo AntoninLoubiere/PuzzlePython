@@ -1,4 +1,4 @@
-import type { Block, Puzzle } from './global';
+import type { Block, Puzzle } from './lib/global';
 
 export function isBlocksCorrect(puzzle: Puzzle, blocks: Block[]): boolean {
     if (puzzle.blocks.length != blocks.length) {

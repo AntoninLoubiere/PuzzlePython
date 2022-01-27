@@ -1,18 +1,17 @@
 <script lang="ts">
-    import type { Block, Puzzle, Results as Result, Results } from '../../global';
     import { onMount } from 'svelte';
-    import { getAllPuzzleResults, getPuzzle, getPuzzleResults } from '../../database/puzzles';
-    import { userId, userStore } from '../../store';
-    import { getShuffledBlocks, isBlocksCorrect } from '../../utils';
-    import CodeBlocksList from '../../components/CodeBlocksList.svelte';
-    import PuzzleResults from '../../components/PuzzleResults.svelte';
+    import { getAllPuzzleResults, getPuzzle, getPuzzleResults } from '$lib/database/puzzles';
+    import { userId, userStore } from '$lib/store';
+    import { getShuffledBlocks, isBlocksCorrect } from '$lib/utils';
+    import CodeBlocksList from '$lib/components/CodeBlocksList.svelte';
+    import PuzzleResults from '$lib/components/PuzzleResults.svelte';
     import type { Unsubscriber } from 'svelte/store';
 
     const dateFormater = new Intl.DateTimeFormat('fr', { dateStyle: 'full', timeStyle: 'short' });
-    let shuffle: boolean = false;
+    let shuffle = false;
     let blocks: Block[] = [];
     let falseBlocks: Block[] = [];
-    let puzzleHasFalseBlocks: boolean = false;
+    let puzzleHasFalseBlocks = false;
     let puzzle: Puzzle | null;
     let currentPuzzleUnsubsriber: Unsubscriber = null;
     let loading = true;
@@ -21,7 +20,7 @@
     let allResults: Results[] = [];
     let resultsSent = 0; // 0 - none, 1 - without succeeding, 2 - with success
     let resultLoading = 1; // 0 - none, 1 - initializing, 2 - sending
-    let result: Result = null;
+    let result: Results = null;
 
     $: authored = puzzle && $userStore.user?.uid == puzzle.owner;
     $: validButtonText =
@@ -46,7 +45,7 @@
             loading = false;
             puzzle = p;
             puzzleHasFalseBlocks = p.falseBlocks.length > 0;
-            currentPuzzleUnsubsriber = userStore.subscribe((_) => {
+            currentPuzzleUnsubsriber = userStore.subscribe(() => {
                 if (p) {
                     allResults = [];
                     if ($userStore.user?.uid == puzzle.owner) {

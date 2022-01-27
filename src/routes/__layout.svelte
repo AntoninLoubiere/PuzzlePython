@@ -1,9 +1,9 @@
 <script>
     import { page } from '$app/stores';
-    import { userStore } from '../store';
+    import { userStore } from '$lib/store';
 
     import '../app.css';
-    import { auth } from '../middleware/auth';
+    import { auth } from '$lib/middleware/auth';
     import { goto } from '$app/navigation';
     function loginCallback() {
         goto(

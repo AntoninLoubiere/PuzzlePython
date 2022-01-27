@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type { Block } from 'src/global';
     import { onMount } from 'svelte';
     import { dndzone } from 'svelte-dnd-action';
     import { flip } from 'svelte/animate';

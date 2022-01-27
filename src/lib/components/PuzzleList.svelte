@@ -1,15 +1,14 @@
 <script lang="ts">
-    import type { Puzzle as PuzzleType } from 'src/global';
-    import Puzzle from './Puzzle.svelte';
+    import { default as PuzzleComponent } from './Puzzle.svelte';
 
-    export let puzzles: PuzzleType[];
+    export let puzzles: Puzzle[];
 </script>
 
 <div class="m-auto max-w-xl">
     <h2 class="text-3xl font-semibold uppercase color-primary text-center m-3">Vos puzzles</h2>
     <ul>
         {#each puzzles as puzzle (puzzle.id)}
-            <li><Puzzle {puzzle} /></li>
+            <li><PuzzleComponent {puzzle} /></li>
         {/each}
         <a
             class="border-2 border-dashed border-gray-500 text-color-light

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type { Puzzle } from '../global';
     export let puzzle: Puzzle;
 
     const dateFormater = new Intl.DateTimeFormat('fr', { dateStyle: 'medium', timeStyle: 'short' });

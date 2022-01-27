@@ -1,12 +1,8 @@
 <script lang="ts">
-    import hljs from 'highlight.js';
-    import python from 'highlight.js/lib/languages/python';
-    import type { Block } from '../global';
+    import hljs from '$lib/config/highlight';
 
     export let block: Block;
     export let indent: boolean;
-
-    hljs.registerLanguage('python', python);
 
     const BLOCK_INDENT_WIDTH = 4;
     const MAX_INDENT = 10;
