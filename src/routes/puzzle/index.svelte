@@ -92,7 +92,7 @@
                 message = 0;
             }
             setTimeout(() => (message = null), 3000);
-        } else {
+        } else if (!message) {
             [blocks, falseBlocks] = getShuffledBlocks(puzzle);
             shuffle = true;
         }

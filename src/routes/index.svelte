@@ -3,7 +3,7 @@
 
     import { userStore } from '$lib/store';
     import PuzzleList from '$lib/components/PuzzleList.svelte';
-    import LoginWrapper from '$wlib/components/LoginWrapper.svelte';
+    import LoginWrapper from '$lib/components/LoginWrapper.svelte';
 
     let puzzles: Puzzle[] = [];
     $: if ($userStore.isLoggedIn) {
