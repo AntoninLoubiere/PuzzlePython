@@ -35,7 +35,7 @@
     },
     "type": "module",
     "dependencies": {
-        "firebase": "^9.6.1",
+        "firebase": "^9.17.1",
         "highlight.js": "^11.3.1"
     }
 }
